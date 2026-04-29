@@ -1,0 +1,15 @@
+import Section from '../components/ui/Section'
+import SectionHeader from '../components/ui/SectionHeader'
+import Button from '../components/ui/Button'
+import { branchesData, eventsData, ministriesData, videosData } from '../data/content'
+
+export default function HomePage({ navigate }) {
+  const mainBranch = branchesData.find((b) => b.isMain)
+  return <>
+    <Section className="pb-12 pt-20"><div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2"><div><p className="text-xs uppercase tracking-[0.2em] text-blue-900">Welcome Home</p><h1 className="mt-4 font-serif text-5xl leading-tight md:text-6xl">A Place of Worship, Word, and Community</h1><p className="mt-6 max-w-xl text-slate-600">Join a Christ-centered church family where reverence, compassion, and spiritual growth shape every gathering.</p><div className="mt-8 flex flex-wrap gap-3"><Button to="/about" onNavigate={navigate}>Plan a Visit</Button><Button to="/videos" onNavigate={navigate} variant="secondary">Watch Messages</Button></div></div><div><img src={mainBranch.image} alt="Church sanctuary exterior" className="h-[420px] w-full rounded-xl object-cover"/></div></div></Section>
+    <Section className="border-y border-slate-200 bg-slate-50"><div className="mx-auto grid max-w-7xl gap-5 px-6 md:grid-cols-4">{['Sunday 9:00 AM','Midweek Wed 7:00 PM','Brookfield Main Campus','Prayer & Youth Ministries'].map((item)=><div key={item} className="rounded-lg border border-slate-200 bg-white p-5 text-sm text-slate-700">{item}</div>)}</div></Section>
+    <Section><div className="mx-auto max-w-7xl px-6"><SectionHeader eyebrow="Ministries" title="Life in Community" description="Grace-centered ministries serving families, youth, and the city." /><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{ministriesData.map((m)=><article key={m.id} className="rounded-lg border border-slate-200 p-6"><h3 className="font-semibold">{m.name}</h3><p className="mt-2 text-sm text-slate-600">{m.description}</p></article>)}</div></div></Section>
+    <Section className="bg-slate-50"><div className="mx-auto max-w-7xl px-6"><SectionHeader eyebrow="Weekly Events" title="Gather with Us Through the Week" /><div className="grid gap-4 md:grid-cols-2">{eventsData.slice(0,4).map((e)=><article key={e.id} className="rounded-lg border border-slate-200 bg-white p-5"><p className="text-xs uppercase text-blue-800">{e.category}</p><h3 className="mt-1 font-semibold">{e.title}</h3><p className="text-sm text-slate-600">{e.day} · {e.time}</p></article>)}</div></div></Section>
+    <Section><div className="mx-auto max-w-7xl px-6"><SectionHeader eyebrow="Featured Videos" title="Recent Ministry Messages" /><div className="grid gap-5 md:grid-cols-2">{videosData.map((v)=><article key={v.id} className="rounded-lg border border-slate-200 overflow-hidden"><img src={v.thumbnail} alt="Sermon thumbnail" className="h-44 w-full object-cover"/><div className="p-5"><h3 className="font-semibold">{v.title}</h3><p className="mt-2 text-sm text-slate-600">{v.description}</p></div></article>)}</div></div></Section>
+  </>
+}
