@@ -1,0 +1,5 @@
+import { NAV_LINKS, SITE, SOCIAL_LINKS } from '../../constants/site'
+
+export default function Footer({ navigate }) {
+  return <footer className="border-t border-slate-200 bg-slate-50 py-12"><div className="mx-auto grid max-w-7xl gap-8 px-6 md:grid-cols-4"><div><h3 className="font-serif text-xl">{SITE.shortName}</h3><p className="mt-3 text-sm text-slate-600">A house of worship, word, and compassionate community.</p></div><div><h4 className="text-sm font-semibold">Quick Links</h4><ul className="mt-3 space-y-2 text-sm">{NAV_LINKS.map((l)=><li key={l.to}><a href={l.to} onClick={(e)=>{e.preventDefault();navigate(l.to)}} className="text-slate-600 hover:text-slate-900">{l.label}</a></li>)}</ul></div><div><h4 className="text-sm font-semibold">Contact</h4><p className="mt-3 text-sm text-slate-600">{SITE.address}<br/>{SITE.phone}<br/>{SITE.email}</p></div><div><h4 className="text-sm font-semibold">Social</h4><ul className="mt-3 space-y-2 text-sm">{SOCIAL_LINKS.map((s)=><li key={s.label}><a href={s.href} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-900">{s.label}</a></li>)}</ul></div></div></footer>
+}
